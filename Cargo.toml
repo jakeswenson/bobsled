@@ -1,5 +1,5 @@
 [package]
-name = "blobsled"
+name = "bobsled"
 version = "0.0.0"
 authors = ["Jake Swenson <jake@jakeswenson.com>"]
 edition = "2018"
@@ -12,7 +12,7 @@ description = "An API around Sled for CRUD operations with access to the transac
 build = "build.rs"
 
 [lib]
-name = "blobsled"
+name = "bobsled"
 path = "src/lib/mod.rs"
 
 [[bin]]

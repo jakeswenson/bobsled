@@ -6,8 +6,8 @@ use sled::Transactional;
 use tonic::codegen::Arc;
 use tonic::{transport::Server, Request, Response, Status};
 
-use blobsled::protos::journal_api_server::{JournalApi, JournalApiServer};
-use blobsled::protos::{CreateRequest, CreateResponse, RecordId};
+use bobsled::protos::journal_api_server::{JournalApi, JournalApiServer};
+use bobsled::protos::{CreateRequest, CreateResponse, RecordId};
 use prost::Message;
 
 #[derive(Debug)]

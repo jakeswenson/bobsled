@@ -95,7 +95,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "blobsled"
+name = "bobsled"
 version = "0.0.0"
 dependencies = [
  "ctrlc",
