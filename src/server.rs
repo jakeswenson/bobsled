@@ -6,8 +6,8 @@ use sled::Transactional;
 use tonic::codegen::Arc;
 use tonic::{transport::Server, Request, Response, Status};
 
-use blobsled::journal_api_server::{JournalApi, JournalApiServer};
-use blobsled::{CreateRequest, CreateResponse, RecordId};
+use blobsled::protos::journal_api_server::{JournalApi, JournalApiServer};
+use blobsled::protos::{CreateRequest, CreateResponse, RecordId};
 use prost::Message;
 
 #[derive(Debug)]
@@ -78,7 +78,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::1]:50051".parse()?;
 
     let config = sled::Config::default()
-        .path("data.sled".to_owned())
+        .path("dbs/data.sled".to_owned())
         .temporary(true)
         .cache_capacity(10_000_000_000)
         .flush_every_ms(Some(1000))

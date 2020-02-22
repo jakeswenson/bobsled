@@ -1,5 +1,5 @@
-use blobsled::journal_api_client::JournalApiClient;
-use blobsled::{CreateRequest, OwnerId};
+use blobsled::protos::journal_api_client::JournalApiClient;
+use blobsled::protos::{CreateRequest, OwnerId};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

@@ -13,10 +13,10 @@ build = "build.rs"
 
 [lib]
 name = "blobsled"
-path = "src/protos/mod.rs"
+path = "src/lib/mod.rs"
 
 [[bin]]
-name = "server"
+name = "api"
 path = "src/server.rs"
 
 [[bin]]
