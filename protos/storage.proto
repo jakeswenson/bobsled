@@ -1,0 +1,32 @@
+syntax = "proto3";
+import "google/protobuf/struct.proto";
+
+package blobsled.storage;
+
+message OwnerId {
+    string value = 1;
+}
+
+message RecordId {
+    string value = 1;
+}
+
+message Version {
+    int32 value = 1;
+}
+
+message ChangeId {
+    bytes value = 1;
+}
+
+message StoredRecord {
+    Version version = 1;
+    google.protobuf.Value payload = 2;
+}
+
+message Change {
+    OwnerId owner_id = 1;
+    RecordId record_id = 2;
+    Version version = 3;
+    google.protobuf.Value payload = 4;
+}

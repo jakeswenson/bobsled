@@ -1,26 +1,57 @@
 syntax = "proto3";
 import "google/protobuf/struct.proto";
+import "storage.proto";
 
-package blobsled;
+package blobsled.api;
 
 service JournalApi {
     // Our SayHello rpc accepts HelloRequests and returns HelloReplies
     rpc Create (CreateRequest) returns (CreateResponse);
-}
-
-message OwnerId {
-    string value = 1;
-}
-
-message RecordId {
-    string value = 1;
+    rpc Get (GetRequest) returns (GetReply);
+    rpc Update (UpdateRequest) returns (UpdateReply);
+    rpc ReadChanges (ReadChangesRequest) returns (ChangesReply);
 }
 
 message CreateRequest {
-    OwnerId owner_id = 1;
-    google.protobuf.Struct payload = 2;
+    blobsled.storage.OwnerId owner_id = 1;
+    google.protobuf.Value payload = 2;
 }
 
 message CreateResponse {
-    RecordId record_id = 1;
+    blobsled.storage.RecordId record_id = 1;
+}
+
+message GetRequest {
+    blobsled.storage.OwnerId owner_id = 1;
+    blobsled.storage.RecordId record_id = 2;
+}
+
+message GetReply {
+    blobsled.storage.OwnerId owner_id = 1;
+    blobsled.storage.RecordId record_id = 2;
+
+    blobsled.storage.StoredRecord record = 3;
+}
+
+message UpdateRequest {
+    blobsled.storage.OwnerId owner_id = 1;
+    blobsled.storage.RecordId record_id = 2;
+    blobsled.storage.Version version = 3;
+    google.protobuf.Value payload = 4;
+}
+
+message UpdateReply {
+    blobsled.storage.OwnerId owner_id = 1;
+    blobsled.storage.RecordId record_id = 2;
+    blobsled.storage.Version new_version = 3;
+}
+
+message ReadChangesRequest {
+    blobsled.storage.ChangeId after = 1;
+    int32 limit = 2;
+}
+
+message ChangesReply {
+    blobsled.storage.ChangeId last_change = 1;
+    repeated blobsled.storage.Change changes = 2;
 }
