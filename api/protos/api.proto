@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/struct.proto";
+
+package blobsled;
+
+service JournalApi {
+    // Our SayHello rpc accepts HelloRequests and returns HelloReplies
+    rpc Create (CreateRequest) returns (CreateResponse);
+}
+
+message OwnerId {
+    string value = 1;
+}
+
+message RecordId {
+    string value = 1;
+}
+
+message CreateRequest {
+    OwnerId owner_id = 1;
+    google.protobuf.Struct payload = 2;
+}
+
+message CreateResponse {
+    RecordId record_id = 1;
+}
