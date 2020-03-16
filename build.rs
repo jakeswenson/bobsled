@@ -4,6 +4,7 @@ use std::path::Path;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     compile_protos("protos/storage.proto")?;
     compile_protos("protos/api.proto")?;
+    compile_protos("protos/replication.proto")?;
     Ok(())
 }
 

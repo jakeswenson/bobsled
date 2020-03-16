@@ -23,6 +23,10 @@ path = "src/server.rs"
 name = "client"
 path = "src/client.rs"
 
+[[bin]]
+name = "replica"
+path = "src/replica.rs"
+
 [dependencies]
 tonic = "0.1"
 prost = "0.6"
