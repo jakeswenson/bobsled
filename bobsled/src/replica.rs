@@ -1,5 +1,3 @@
-use prost_types::{value, Value};
-
 use bobsled::protos::replication::replication_api_client::ReplicationApiClient;
 
 async fn send() -> Result<(), Box<dyn std::error::Error>> {

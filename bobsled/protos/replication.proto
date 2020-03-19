@@ -2,24 +2,24 @@ syntax = "proto3";
 import "google/protobuf/struct.proto";
 import "storage.proto";
 
-package blobsled.replication_api;
+package bobsled.replication_api;
 
 service ReplicationApi {
     rpc StreamChanges (stream ReplicationRequest) returns (stream ChangesReply);
 }
 
 message ConfirmWrite {
-    blobsled.storage.ChangeId confirmed_to=1;
+    bobsled.storage.ChangeId confirmed_to=1;
 }
 
 message ReplicationRequest {
     oneof test {
-        blobsled.storage.ChangeId after = 1;
+        bobsled.storage.ChangeId after = 1;
         ConfirmWrite replication = 2;
     }
 }
 
 message ChangesReply {
-    blobsled.storage.ChangeId last_change = 1;
-    repeated blobsled.storage.Change changes = 2;
+    bobsled.storage.ChangeId last_change = 1;
+    repeated bobsled.storage.Change changes = 2;
 }
