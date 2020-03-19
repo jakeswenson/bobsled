@@ -13,7 +13,7 @@ message ConfirmWrite {
 }
 
 message ReplicationRequest {
-    oneof test {
+    oneof Message {
         bobsled.storage.ChangeId after = 1;
         ConfirmWrite replication = 2;
     }
