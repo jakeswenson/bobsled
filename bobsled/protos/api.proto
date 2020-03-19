@@ -1,0 +1,57 @@
+syntax = "proto3";
+import "google/protobuf/struct.proto";
+import "storage.proto";
+
+package bobsled.api;
+
+service JournalApi {
+    // Our SayHello rpc accepts HelloRequests and returns HelloReplies
+    rpc Create (CreateRequest) returns (CreateResponse);
+    rpc Get (GetRequest) returns (GetReply);
+    rpc Update (UpdateRequest) returns (UpdateReply);
+    rpc ReadChanges (ReadChangesRequest) returns (ChangesReply);
+}
+
+message CreateRequest {
+    bobsled.storage.OwnerId owner_id = 1;
+    google.protobuf.Value payload = 2;
+}
+
+message CreateResponse {
+    bobsled.storage.RecordId record_id = 1;
+}
+
+message GetRequest {
+    bobsled.storage.OwnerId owner_id = 1;
+    bobsled.storage.RecordId record_id = 2;
+}
+
+message GetReply {
+    bobsled.storage.OwnerId owner_id = 1;
+    bobsled.storage.RecordId record_id = 2;
+
+    bobsled.storage.StoredRecord record = 3;
+}
+
+message UpdateRequest {
+    bobsled.storage.OwnerId owner_id = 1;
+    bobsled.storage.RecordId record_id = 2;
+    bobsled.storage.Version version = 3;
+    google.protobuf.Value payload = 4;
+}
+
+message UpdateReply {
+    bobsled.storage.OwnerId owner_id = 1;
+    bobsled.storage.RecordId record_id = 2;
+    bobsled.storage.Version new_version = 3;
+}
+
+message ReadChangesRequest {
+    bobsled.storage.ChangeId after = 1;
+    int32 limit = 2;
+}
+
+message ChangesReply {
+    bobsled.storage.ChangeId last_change = 1;
+    repeated bobsled.storage.Change changes = 2;
+}

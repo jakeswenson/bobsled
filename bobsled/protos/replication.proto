@@ -1,0 +1,25 @@
+syntax = "proto3";
+import "google/protobuf/struct.proto";
+import "storage.proto";
+
+package bobsled.replication_api;
+
+service ReplicationApi {
+    rpc StreamChanges (stream ReplicationRequest) returns (stream ChangesReply);
+}
+
+message ConfirmWrite {
+    bobsled.storage.ChangeId confirmed_to=1;
+}
+
+message ReplicationRequest {
+    oneof test {
+        bobsled.storage.ChangeId after = 1;
+        ConfirmWrite replication = 2;
+    }
+}
+
+message ChangesReply {
+    bobsled.storage.ChangeId last_change = 1;
+    repeated bobsled.storage.Change changes = 2;
+}
